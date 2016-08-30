@@ -3,6 +3,7 @@
     <clientModule name="ChartJS" version="3.5.2" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
             <widgetFile path="ChartJS/widgets/BarChart/BarChart.xml"/>
+            <widgetFile path="ChartJS/widgets/AffixBarChart/AffixBarChart.xml"/>
             <widgetFile path="ChartJS/widgets/CurrencyPieChart/CurrencyPieChart.xml"/>
             <widgetFile path="ChartJS/widgets/LineChart/LineChart.xml"/>
             <widgetFile path="ChartJS/widgets/StackedBarChart/StackedBarChart.xml"/>
@@ -13,6 +14,7 @@
         </widgetFiles>
         <files>
             <file path="ChartJS/widgets/BarChart/widget/"/>
+            <file path="ChartJS/widgets/AffixBarChart/widget/"/>
             <file path="ChartJS/widgets/CurrencyPieChart/widget/"/>
             <file path="ChartJS/widgets/LineChart/widget/"/>
             <file path="ChartJS/widgets/StackedBarChart/widget/"/>
