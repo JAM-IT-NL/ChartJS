@@ -1,3 +1,6 @@
+# Mendix ChartJS widget JAM-IT Fork
+This fork adds currency formatting to the original Mendix ChartJS widget.
+
 # Mendix ChartJS widget
 
 This [widget](https://appstore.home.mendix.com/link/app/1712/Mendix/ChartJS-Widget) is a wrapper for the [ChartJS library](http://www.chartjs.org/) and you can use it to visualize your aggregated data.
