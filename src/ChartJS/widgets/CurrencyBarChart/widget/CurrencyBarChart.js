@@ -95,12 +95,9 @@ define([
 
                                     var formattedAmount = this._formatValue(amount);
                                     var label = "";
-                                    if (data.labels[tooltipItems.index] != undefined) {
-                                        label += data.labels[tooltipItems.index] + ': ';
-                                    }
-                                    label += ' € ' + formattedAmount
-
-                                    return label;
+                                    label += data.datasets[tooltipItems.datasetIndex].label + ':  € ' + formattedAmount;
+                                    
+                                    return label; 
                                 })
                             },
                         },
