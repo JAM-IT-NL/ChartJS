@@ -47,10 +47,12 @@ define([
                         //Boolean - Whether we animate scaling the Doughnut from the centre
                         animateScale : this.animateScale,
 
-                        legendCallback : this._legendAlternateCallback,
+                        legendCallback : this._legendAlternateCallback, 
 
                         //cutOut of pie
                         cutoutPercentage : 0, //always zero for Pie chart
+
+                        showLabel: true, //Enables labels on the pie
 
                         tooltips : {
                             callbacks : {
@@ -77,6 +79,73 @@ define([
                     })
                 };
                 this._chart = new this._chartJS(this._ctx, chartProperties);
+
+                // Chart.pluginService.register({
+                //     afterDraw: function (chart, easing) {
+                //         if (chart.config.options.showPercentage || chart.config.options.showLabel) {
+                //             var self = chart.config;
+                //             var ctx = chart.chart.ctx;
+
+                //             ctx.font = '12px Arial';
+                //             ctx.textAlign = "center";
+                //             ctx.fillStyle = "#fff";
+                            
+                //             self.data.datasets.forEach(function (dataset, datasetIndex) {               
+                //                 var total = 0, //total values to compute fraction
+                //                     labelxy = [],
+                //                     offset = Math.PI / 2, //start sector from top
+                //                     radius,
+                //                     centerx,
+                //                     centery, 
+                //                     lastend = 0; //prev arc's end line: starting with 0
+
+                //                 for (var val of dataset.data) { total += val; } 
+                                
+                //                 //TODO needs improvement
+                //                 var i = 0;
+                //                 var meta = dataset._meta[i];
+                //                 while(!meta) {
+                //                     i++;
+                //                     meta = dataset._meta[i];
+                //                 }
+                                
+                //                 var element;
+                //                 var index = 0;
+                //                 for(index = 0; index < meta.data.length; index++) {
+                                    
+                //                     element = meta.data[index];
+                //                     radius = 0.9 * element._view.outerRadius - element._view.innerRadius;
+                //                     centerx = element._model.x;
+                //                     centery = element._model.y;
+                //                     var thispart = dataset.data[index],
+                //                         arcsector = Math.PI * (2 * thispart / total);
+                //                     if (element.hasValue() && dataset.data[index] > 0) {
+                //                       labelxy.push(lastend + arcsector / 2 + Math.PI + offset);
+                //                     }
+                //                     else {
+                //                       labelxy.push(-1);
+                //                     }
+                //                     lastend += arcsector;
+                //                 }
+
+
+                //                 var lradius = radius * 3 / 4;
+                //                 for (var idx in labelxy) {
+                //                     if (labelxy[idx] === -1) continue;
+                //                     var langle = labelxy[idx],
+                //                     dx = centerx + lradius * Math.cos(langle),
+                //                     dy = centery + lradius * Math.sin(langle),
+                //                     val = Math.round(dataset.data[idx] / total * 100);
+                //                     if (chart.config.options.showPercentage)
+                //                         ctx.fillText(val + '%', dx, dy);
+                //                     else 
+                //                         ctx.fillText(chart.config.data.labels[idx], dx, dy);
+                //                 }
+                //                 ctx.restore();
+                //             });
+                //         }
+                //     }
+                // });
 
                 // Set the con
                 html.set(this._numberNode, this._data.object.get(this.numberInside));

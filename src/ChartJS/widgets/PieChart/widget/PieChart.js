@@ -107,7 +107,7 @@ define([
                     options: this._chartOptions({
 
                         //Boolean - Whether we should show a stroke on each segment
-                        segmentShowStroke : this.segmentShowStroke,
+                        segmentShowStroke : this.segmentShowStroke, 
 
                         //String - The colour of each segment stroke
                         segmentStrokeColor : this.segmentStrokeColor,
