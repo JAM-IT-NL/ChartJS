@@ -89,18 +89,22 @@ define([
                         scaleLineColor: this.scaleLineColor,
 
                         tooltips: {
-                            callbacks: {
-                                label: lang.hitch(this, function(tooltipItems, data) {
-                                    var amount = data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index];
+                            enabled: false
+                        }
 
-                                    var formattedAmount = this._formatValue(amount);
-                                    var label = "";
-                                    label += data.datasets[tooltipItems.datasetIndex].label + ':  € ' + formattedAmount;
+                        // tooltips: {
+                        //     callbacks: {
+                        //         label: lang.hitch(this, function(tooltipItems, data) {
+                        //             var amount = data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index];
+
+                        //             var formattedAmount = this._formatValue(amount);
+                        //             var label = "";
+                        //             label += data.datasets[tooltipItems.datasetIndex].label + ':  € ' + formattedAmount;
                                     
-                                    return label; 
-                                })
-                            },
-                        },
+                        //             return label; 
+                        //         })
+                        //     },
+                        // },
                     })
                 };
 
@@ -110,6 +114,29 @@ define([
                 }
 
                 this._chart = new this._chartJS(this._ctx, chartProperties);
+
+                Chart.pluginService.register({
+                    afterDraw: lang.hitch(this, function(chartInstance) {
+                        if (chartInstance.chart.config.type === 'bar'){
+                            var ctx = chartInstance.chart.ctx;
+
+                            // render the value of the chart above the bar
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, 'normal', Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+
+                            chartInstance.data.datasets.forEach(lang.hitch(this, function (dataset) {
+                                for (var i = 0; i < dataset.data.length; i++) {
+                                    var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model;
+
+                                    var formattedAmount = this._formatValue(dataset.data[i]);
+
+                                    ctx.fillText('€ ' + formattedAmount, model.x, model.y - 2);
+                                }
+                            }));
+                        }
+                  })
+                });
 
                 this.connect(window, "resize", lang.hitch(this, function() {
                     this._resize();
