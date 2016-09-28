@@ -135,10 +135,20 @@ define([
                                 chartInstance.data.datasets.forEach(lang.hitch(this, function (dataset) {
                                     for (var i = 0; i < dataset.data.length; i++) {
                                         var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model;
+                                        var scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
+                                        ctx.fillStyle = '#444';
+
+                                        var y_pos = model.y - 5;
+                                        // Make sure data value does not get overflown and hidden
+                                        // when the bar's value is too close to max value of scale
+                                        // Note: The y value is reverse, it counts from top down
+                                        if ((scale_max - model.y) / scale_max >= 0.93){
+                                            y_pos = model.y + 25; 
+                                        }
 
                                         var formattedAmount = this._formatValue(dataset.data[i]);
 
-                                        ctx.fillText('€ ' + formattedAmount, model.x, model.y - 2);
+                                        ctx.fillText('€ ' + formattedAmount, model.x, y_pos);
                                     }
                                 }));
                             }
